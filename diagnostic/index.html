@@ -6,39 +6,48 @@
 <title>Juge d'Impro · Diagnostic du micro</title>
 <meta name="theme-color" content="#0d0d12">
 <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
-<style>:root{--lightningcss-light: ;--lightningcss-dark:initial;color-scheme:dark;--fond:#0d0d12;--panneau:#16161f;--bord:#2a2a3a;--texte:#ececf3;--doux:#8b8ba3;--or:#fc0;--rose:#ff3d6e;--vert:#3ddc97}*{box-sizing:border-box}body{background:var(--fond);color:var(--texte);margin:0;max-width:640px;margin-inline:auto;padding:16px;font:16px/1.5 system-ui,Roboto,sans-serif}h1{margin:4px 0 8px;font-size:20px}h1 span{color:var(--or)}p{margin:8px 0}.doux{color:var(--doux);font-size:14px}.test{background:var(--panneau);border:1px solid var(--bord);border-radius:14px;margin:12px 0;padding:14px}.test h2{margin:0 0 4px;font-size:16px}button{font:inherit;background:var(--or);color:#111;border:0;border-radius:12px;width:100%;margin-top:8px;padding:14px 16px;font-weight:700}button:disabled{opacity:.45}button.second{color:var(--texte);border:1px solid var(--bord);background:0 0}.direct{border:1px dashed var(--bord);background:#0b0b10;border-radius:10px;min-height:3em;margin-top:8px;padding:8px 10px}.verdict{margin-top:8px;font-weight:700}.ok{color:var(--vert)}.ko{color:var(--rose)}.jauge{background:#0b0b10;border-radius:4px;height:8px;margin-top:8px;overflow:hidden}.jauge div{background:var(--vert);width:0;height:100%}textarea{width:100%;height:220px;color:var(--texte);border:1px solid var(--bord);background:#0b0b10;border-radius:10px;padding:8px;font:12px/1.4 ui-monospace,monospace}</style>
-  <script type="module" crossorigin src="../assets/diagnostic-BeovTD7I.js"></script>
+<style>:root{--lightningcss-light: ;--lightningcss-dark:initial;color-scheme:dark;--fond:#0d0d12;--panneau:#16161f;--bord:#2a2a3a;--texte:#ececf3;--doux:#8b8ba3;--or:#fc0;--rose:#ff3d6e;--vert:#3ddc97}*{box-sizing:border-box}body{background:var(--fond);color:var(--texte);margin:0;max-width:640px;margin-inline:auto;padding:16px;font:16px/1.5 system-ui,Roboto,sans-serif}h1{margin:4px 0 8px;font-size:20px}h1 span{color:var(--or)}p{margin:8px 0}.doux{color:var(--doux);font-size:14px}.test{background:var(--panneau);border:1px solid var(--bord);border-radius:14px;margin:12px 0;padding:14px}.test h2{margin:0 0 4px;font-size:16px}button{font:inherit;background:var(--or);color:#111;border:0;border-radius:12px;width:100%;margin-top:8px;padding:14px 16px;font-weight:700}button:disabled{opacity:.45}button.second{color:var(--texte);border:1px solid var(--bord);background:0 0}.direct{border:1px dashed var(--bord);background:#0b0b10;border-radius:10px;min-height:3em;margin-top:8px;padding:8px 10px}.direct i{color:var(--doux)}.verdict{margin-top:8px;font-weight:700}.ok{color:var(--vert)}.ko{color:var(--rose)}.jauge{background:#0b0b10;border-radius:4px;height:8px;margin-top:8px;overflow:hidden}.jauge div{background:var(--vert);width:0;height:100%}textarea{width:100%;height:220px;color:var(--texte);border:1px solid var(--bord);background:#0b0b10;border-radius:10px;padding:8px;font:12px/1.4 ui-monospace,monospace}</style>
+  <script type="module" crossorigin src="../assets/diagnostic-OKZdtHgC.js"></script>
   <link rel="modulepreload" crossorigin href="../assets/modulepreload-polyfill-P2Xu9kJm.js">
+  <link rel="modulepreload" crossorigin href="../assets/reconnaissance-Dnp9WkXR.js">
 </head>
 <body>
 <h1>Diagnostic du <span>micro</span></h1>
-<p>Trois tests de 10 secondes, à faire dans l'ordre, au calme. Pendant chaque test, dis à voix haute&nbsp;:
-  <b>« je pose mes rimes sous la lumière »</b>, puis continue de parler normalement.</p>
+<p>Quatre tests de 12 secondes, à faire dans l'ordre, au calme. Pendant chaque test, parle sans t'arrêter :
+  <b>« je pose mes rimes sous la lumière »</b>, puis ce que tu veux.</p>
 <p class="doux" id="infos"></p>
 
 <div class="test" id="t1">
-  <h2>Test 1 · La reconnaissance vocale seule</h2>
-  <p class="doux">Comme une dictée : seule la reconnaissance utilise le micro.</p>
+  <h2>Test 1 · La reconnaissance seule</h2>
+  <p class="doux">Seule la reconnaissance utilise le micro. Vérifie que chaque mot n'apparaît qu'une fois.</p>
   <button data-test="1">▶ Lancer le test 1</button>
   <div class="direct"></div><div class="verdict"></div>
 </div>
 <div class="test" id="t2">
-  <h2>Test 2 · Reconnaissance + enregistrement (comme pendant une impro)</h2>
-  <p class="doux">L'outil ouvre le micro pour enregistrer et mesurer ta voix, puis lance la reconnaissance.</p>
+  <h2>Test 2 · Micro « appel » + reconnaissance (l'outil aujourd'hui)</h2>
+  <p class="doux">L'outil ouvre le micro avec suppression d'écho et de bruit pour enregistrer, puis lance la reconnaissance.</p>
   <button data-test="2">▶ Lancer le test 2</button>
   <div class="jauge"><div></div></div>
   <div class="direct"></div><div class="verdict"></div>
 </div>
 <div class="test" id="t3">
-  <h2>Test 3 · Reconnaissance phrase par phrase</h2>
-  <p class="doux">Une autre façon d'utiliser la reconnaissance, plus courte, relancée après chaque phrase.</p>
+  <h2>Test 3 · Micro « brut » + reconnaissance</h2>
+  <p class="doux">Le micro est ouvert sans traitement (pas de suppression d'écho ni de bruit), puis la reconnaissance démarre.</p>
   <button data-test="3">▶ Lancer le test 3</button>
+  <div class="jauge"><div></div></div>
+  <div class="direct"></div><div class="verdict"></div>
+</div>
+<div class="test" id="t4">
+  <h2>Test 4 · Reconnaissance d'abord, micro brut ensuite</h2>
+  <p class="doux">La reconnaissance démarre, puis l'enregistrement s'ajoute au bout de 3 secondes. Continue de parler après.</p>
+  <button data-test="4">▶ Lancer le test 4</button>
+  <div class="jauge"><div></div></div>
   <div class="direct"></div><div class="verdict"></div>
 </div>
 
 <div class="test">
   <h2>Le rapport</h2>
-  <p class="doux">Une fois les trois tests faits : copie le rapport et colle-le dans la conversation (ou fais une capture d'écran de cette page).</p>
+  <p class="doux">Une fois les quatre tests faits : copie le rapport et colle-le dans la conversation (ou fais une capture d'écran).</p>
   <button id="copier" class="second">📋 Copier le rapport</button>
   <textarea id="rapport" readonly></textarea>
 </div>
