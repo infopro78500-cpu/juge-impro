@@ -9,13 +9,15 @@
  *  - Supabase et tout le reste : jamais gardés (le direct reste le direct).
  * Une nouvelle version attend que l'utilisateur clique « Recharger » : jamais de rechargement en pleine impro.
  */
-const VERSION = "4fd3271fcd02";
+const VERSION = "41f40aca349b";
 const FICHIERS = ["./","./apple-touch-icon.png","./assets/classement-C5t5GXom.js","./assets/classement-Cw7Xj98w.js","./assets/invite-BQP4jTyH.js","./assets/invite-BhmJJ0vM.css","./assets/jeu-D7gsMPQ8.js","./assets/mots-fr-CAuqfMRV.txt","./assets/outil-9GowEqeH.css","./assets/outil-R3o_vC_a.js","./assets/public-DHtBDxiu.css","./assets/reseau-BwUYf7nc.js","./assets/scene-BA5sWYT4.js","./assets/spectateurs-DH489sai.js","./favicon-32.png","./icone-192.png","./icone-512.png","./icone-masquable-512.png","./index.html","./invite/index.html","./manifest.webmanifest","./public/classement.html","./public/index.html"];
 const CACHE = `juge-impro-${VERSION}`;
 const CACHE_CDN = 'juge-impro-cdn';
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FICHIERS)));
+  // « reload » : les fichiers viennent du site, pas du cache du navigateur (GitHub Pages autorise 10 min de cache,
+  // on garderait sinon une page de la version précédente)
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FICHIERS.map((f) => new Request(f, { cache: 'reload' })))));
 });
 
 self.addEventListener('activate', (e) => {
@@ -34,7 +36,8 @@ self.addEventListener('fetch', (e) => {
 
   if (url.origin === self.location.origin) {
     if (requete.mode === 'navigate') {
-      e.respondWith(fetch(requete).then((r) => {
+      // « no-cache » : la page est toujours revérifiée auprès du site (une publication se voit tout de suite)
+      e.respondWith(fetch(requete.url, { cache: 'no-cache', credentials: 'same-origin' }).then((r) => {
         if (r.ok) { const copie = r.clone(); caches.open(CACHE).then((c) => c.put(requete, copie)); }
         return r;
       }).catch(async () => (await caches.match(requete, { ignoreSearch: true, ignoreVary: true })) || caches.match('./index.html')));
