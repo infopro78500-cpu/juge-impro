@@ -9,8 +9,8 @@
  *  - Supabase et tout le reste : jamais gardés (le direct reste le direct).
  * Une nouvelle version attend que l'utilisateur clique « Recharger » : jamais de rechargement en pleine impro.
  */
-const VERSION = "29bd7e287567";
-const FICHIERS = ["./","./apple-touch-icon.png","./assets/classement-C5t5GXom.js","./assets/classement-Cw7Xj98w.js","./assets/invite-BQP4jTyH.js","./assets/invite-BhmJJ0vM.css","./assets/jeu-D7gsMPQ8.js","./assets/mots-fr-CAuqfMRV.txt","./assets/outil-9GowEqeH.css","./assets/outil-WwPdAuG4.js","./assets/public-DHtBDxiu.css","./assets/reseau-BwUYf7nc.js","./assets/scene-BA5sWYT4.js","./assets/spectateurs-DH489sai.js","./favicon-32.png","./icone-192.png","./icone-512.png","./icone-masquable-512.png","./index.html","./invite/index.html","./manifest.webmanifest","./public/classement.html","./public/index.html"];
+const VERSION = "4fd3271fcd02";
+const FICHIERS = ["./","./apple-touch-icon.png","./assets/classement-C5t5GXom.js","./assets/classement-Cw7Xj98w.js","./assets/invite-BQP4jTyH.js","./assets/invite-BhmJJ0vM.css","./assets/jeu-D7gsMPQ8.js","./assets/mots-fr-CAuqfMRV.txt","./assets/outil-9GowEqeH.css","./assets/outil-R3o_vC_a.js","./assets/public-DHtBDxiu.css","./assets/reseau-BwUYf7nc.js","./assets/scene-BA5sWYT4.js","./assets/spectateurs-DH489sai.js","./favicon-32.png","./icone-192.png","./icone-512.png","./icone-masquable-512.png","./index.html","./invite/index.html","./manifest.webmanifest","./public/classement.html","./public/index.html"];
 const CACHE = `juge-impro-${VERSION}`;
 const CACHE_CDN = 'juge-impro-cdn';
 
