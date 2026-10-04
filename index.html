@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juge d'Impro</title>
+<meta name="description" content="Le juge de tes impros de rap : rimes, multisyllabiques, figures de style, battles, vidéos à poster.">
+<meta name="theme-color" content="#0d0d12">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <script type="module" crossorigin src="./assets/outil-WwPdAuG4.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/reseau-BwUYf7nc.js">
+  <link rel="modulepreload" crossorigin href="./assets/jeu-D7gsMPQ8.js">
+  <link rel="modulepreload" crossorigin href="./assets/scene-BA5sWYT4.js">
+  <link rel="modulepreload" crossorigin href="./assets/classement-C5t5GXom.js">
+  <link rel="stylesheet" crossorigin href="./assets/outil-9GowEqeH.css">
+</head>
+<body>
+<div id="maj-appli" class="bandeau-maj" hidden>✨ Une nouvelle version de l’outil est prête. <button id="maj-recharger" class="petit">Recharger</button></div>
+<header>
+  <div class="logo">JUGE<span>D'IMPRO</span></div>
+  <div class="profil-bloc">
+    <label class="profil-choix" title="Le MC qui rappe : ses impros, sa matière et sa progression">🎙️
+      <select id="profil"></select>
+    </label>
+    <button id="profil-renommer" class="petit" title="Renommer ce profil">✏️</button>
+    <button id="installer" class="petit installer" title="Ajouter l’outil à ton écran d’accueil, comme une appli" hidden>📲 Installer l’appli</button>
+    <div id="niveau-chip" class="niveau-chip" hidden>
+      <b id="niveau-num">Niv. 1</b> <span id="niveau-titre">Rookie</span> <span id="serie-chip" class="serie-chip" title="Jours d’affilée avec le défi du jour réussi"></span>
+      <div class="xp"><div id="xp-barre"></div></div>
+    </div>
+  </div>
+  <nav>
+    <button class="onglet actif" data-vue="live">🎤 Live</button>
+    <button class="onglet" data-vue="texte">📝 Texte</button>
+    <button class="onglet" data-vue="entrainement">🏋️ Entraînement</button>
+    <button class="onglet" data-vue="matiere">🗂️ Matière</button>
+    <button class="onglet" data-vue="progression">📈 Progression</button>
+  </nav>
+</header>
+
+<main id="vue-jeu">
+  <!-- Colonne de gauche : contrôles -->
+  <aside class="controles">
+    <section id="ctrl-live">
+      <h3>1 · L'instru</h3>
+      <div class="source-instru">
+        <button class="sous-onglet actif" data-source="fichier">📁 Mon fichier</button>
+        <button class="sous-onglet" data-source="boite">🥁 Boîte à rythmes</button>
+      </div>
+      <div class="ligne biblio-boutons">
+        <button id="biblio-ouvrir" class="petit">📚 Ma bibliothèque (<span id="biblio-nb">0</span>)</button>
+        <button id="biblio-hasard" class="petit" disabled title="Une instru de ta bibliothèque au hasard, selon le filtre choisi dans la bibliothèque (ambiance, favoris)">🎲 Instru au hasard</button>
+      </div>
+      <label class="fichier" id="bloc-fichier">
+        <input type="file" id="instru" accept="audio/*">
+        <span id="nom-instru">Choisir un fichier audio…</span>
+      </label>
+      <div id="bloc-boite" hidden>
+        <select id="style-boite"></select>
+        <p class="astuce">Instru générée en direct : pas de fichier à chercher. Règle le tempo juste en dessous.</p>
+      </div>
+      <div class="ligne">
+        <button id="ecouter" class="petit" disabled>▶ Écouter</button>
+        <label class="volume">🔊 <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7"></label>
+      </div>
+      <label class="case"><input type="checkbox" id="boucle" checked> Instru en boucle</label>
+
+      <div class="tempo">
+        <div class="ligne">
+          <label class="bpm">Tempo <input type="number" id="bpm" min="40" max="220" step="0.1" placeholder="–"> BPM</label>
+          <button id="bpm-d2" class="petit" title="Diviser par 2">÷2</button>
+          <button id="bpm-x2" class="petit" title="Multiplier par 2">×2</button>
+          <button id="tap" class="petit" title="Tape en rythme pour régler le tempo">Tap</button>
+        </div>
+        <p id="bpm-etat" class="astuce">Charge une instru : le tempo est détecté tout seul.</p>
+        <label class="calage">Calage <input type="range" id="calage" min="-200" max="200" step="5" value="0"> <span id="calage-val">0 ms</span></label>
+      </div>
+
+      <h3>2 · Le mode de jeu</h3>
+      <div id="tournoi-bandeau" class="tournoi-bandeau" hidden>
+        <span id="tournoi-texte"></span>
+        <button id="tournoi-preparer" class="petit">▶ Préparer</button>
+        <button id="tournoi-tableau" class="petit" title="Remettre le tableau (ou le champion) sur la scène">📋 Tableau</button>
+      </div>
+      <select id="mode"></select>
+      <button id="tournoi-ouvrir" class="petit">🏟️ Tournoi / soirée open mic…</button>
+      <p id="mode-description" class="astuce"></p>
+
+      <div id="opt-defi" class="options-mode" hidden>
+        <div class="ligne">
+          <select id="defi"></select>
+          <button id="defi-tirage" class="petit" title="Nouveau tirage">🎲</button>
+        </div>
+        <p id="defi-texte" class="astuce"></p>
+      </div>
+
+      <div id="opt-impose" class="options-mode" hidden>
+        <label>Style <select id="impose-style"></select></label>
+        <label>Thème <select id="impose-theme"></select></label>
+        <label>Mots imposés <input id="impose-mots" placeholder="mot1, mot2, mot3"></label>
+        <button id="impose-tirage" class="bouton">🎰 Tout tirer au sort</button>
+        <p class="astuce">Tu peux taper tes propres mots (ceux proposés par ton public, par exemple).</p>
+      </div>
+
+      <div id="opt-rafale" class="options-mode" hidden>
+        <label>Un nouveau mot toutes les
+          <select id="rafale-mesures"><option value="2">2 mesures</option><option value="4" selected>4 mesures</option><option value="8">8 mesures</option></select>
+        </label>
+        <label>Tes mots (facultatif)
+          <textarea id="rafale-mots" rows="2" placeholder="Vide = tirage au sort. Sinon : mots séparés par des virgules."></textarea>
+        </label>
+      </div>
+
+      <div id="opt-featuring" class="options-mode" hidden>
+        <label class="case"><input type="checkbox" id="feat-en-ligne"> 🌐 Un invité me rejoint en ligne</label>
+        <div id="feat-salle" class="salle" hidden>
+          <label>Ton nom de rappeur <input id="feat-nom-hote" value="Moi" maxlength="30"></label>
+          <button id="feat-creer-salle" class="bouton">Créer la salle</button>
+          <div id="feat-lien" hidden>
+            <div class="code-salle">Code : <b id="feat-code"></b></div>
+            <div class="ligne"><input id="feat-url" readonly><button id="feat-copier" class="petit">Copier</button></div>
+            <p class="astuce">Envoie ce lien à ton invité (Chrome ou Edge, avec un casque).</p>
+          </div>
+          <p id="feat-statut" class="astuce"></p>
+        </div>
+        <label id="feat-joueurs-label"><span id="feat-joueurs-texte">Rappeurs (2 à 4, séparés par des virgules)</span> <input id="feat-joueurs" value="MC 1, MC 2"></label>
+        <label id="battle-rounds-label" hidden>Nombre de rounds
+          <select id="battle-rounds"><option value="1">1 round</option><option value="2" selected>2 rounds</option><option value="3">3 rounds</option></select>
+        </label>
+        <label>Chaque passage dure
+          <select id="feat-mesures"><option value="4">4 mesures</option><option value="8" selected>8 mesures</option><option value="16">16 mesures</option></select>
+        </label>
+        <p class="astuce" id="feat-aide">Même micro, chacun son tour : l’outil annonce les passages avec un signal sonore.</p>
+      </div>
+      <div id="opt-studio" class="options-mode" hidden>
+        <label>Brouillon à rapper <select id="studio-brouillon"></select></label>
+        <label>Chaque ligne dure
+          <select id="studio-mesures"><option value="1">1 mesure</option><option value="2" selected>2 mesures</option><option value="4">4 mesures</option></select>
+        </label>
+        <label>Le texte démarre après
+          <select id="studio-intro"><option value="1">1 mesure</option><option value="2" selected>2 mesures</option><option value="4">4 mesures</option><option value="8">8 mesures</option></select>
+        </label>
+        <p class="astuce" id="studio-info"></p>
+      </div>
+
+      <h3>3 · Le format</h3>
+      <select id="duree">
+        <option value="0">Durée libre</option>
+        <option value="30">30 secondes</option>
+        <option value="45">45 secondes</option>
+        <option value="60" selected>1 minute</option>
+        <option value="120">2 minutes</option>
+        <option value="180">3 minutes</option>
+      </select>
+      <select id="enregistrement">
+        <option value="video" selected>🎬 Enregistrer la vidéo de la scène</option>
+        <option value="audio">🎙 Enregistrer l'audio seulement</option>
+        <option value="aucun">Ne pas enregistrer</option>
+      </select>
+      <label class="case"><input type="checkbox" id="garder-audio" checked> 🗂️ Garder l’audio dans la Matière</label>
+      <button id="habillage-ouvrir" class="petit" title="Ton nom, ton @ et ton logo dans tes vidéos, intro, phrase de fin, sous-titres">🎥 Habillage vidéo…</button>
+
+      <h3>📺 Public en live <span class="astuce">(optionnel)</span></h3>
+      <label class="case"><input type="checkbox" id="live-actif"> Mon public m’envoie des mots et des 🔥 depuis son téléphone</label>
+      <div id="live-bloc" class="salle" hidden>
+        <div class="live-haut">
+          <canvas id="live-qr" width="150" height="150" title="Le même QR code s’affiche sur la scène"></canvas>
+          <div>
+            <p class="astuce">Tes spectateurs scannent le QR code (affiché aussi sur la scène) ou ouvrent ce lien :</p>
+            <div class="ligne"><input id="live-url" readonly><button id="live-copier" class="petit">Copier</button></div>
+            <p id="live-stats" class="astuce"></p>
+          </div>
+        </div>
+        <p class="astuce">En Libre, Défi, Imposé ou Survie, chaque mot du public s’affiche 15 s : bonus s’il est placé. En Mots en rafale, il remplace le mot tiré au sort ; le 🎰 de l’Imposé pioche dedans. Les 🔥 font monter la hype.</p>
+        <label class="case"><input type="checkbox" id="live-filtre" checked> Filtrer les insultes et les gros mots</label>
+        <ul id="live-liste" class="live-liste"></ul>
+      </div>
+
+      <h3>4 · Le micro</h3>
+      <div class="vumetre"><div id="niveau"></div></div>
+      <p class="astuce">🎧 Mets un casque : sinon le micro capte l'instru et la transcription se dégrade.</p>
+
+      <p id="preset-info" class="preset-info" hidden></p>
+      <button id="go" class="go">LANCER L'IMPRO</button>
+      <div id="chrono" class="chrono">00:00</div>
+      <p id="alerte" class="alerte" hidden></p>
+    </section>
+
+    <section id="ctrl-texte" hidden>
+      <h3>Colle un texte</h3>
+      <p class="astuce">Une ligne = une mesure. Pratique pour tester l'outil ou juger un texte écrit.</p>
+      <textarea id="zone-texte" rows="14" placeholder="J'arrive sur le beat comme un loup dans la nuit…"></textarea>
+      <button id="analyser" class="go">ANALYSER</button>
+    </section>
+
+    <div class="ia-bloc">
+      <label class="case"><input type="checkbox" id="juge-ia" checked> 🤖 Juge IA (Claude) au bilan</label>
+      <select id="niveau-ia" class="niveau-ia" title="Prix et finesse de l’analyse du juge IA">
+        <option value="eco">Éco · Haiku (~1 centime)</option>
+        <option value="standard" selected>Standard · Sonnet (~2-3 centimes)</option>
+        <option value="expert">Expert · Opus (~4-6 centimes)</option>
+      </select>
+      <p id="statut-ia" class="astuce">Vérification du juge IA…</p>
+    </div>
+  </aside>
+
+  <!-- Centre : scène de jeu / transcription -->
+  <section class="scene">
+    <div class="scene-titre">
+      <div class="sous-onglets">
+        <button class="sous-onglet actif" data-centre="scene">🎮 Scène</button>
+        <button class="sous-onglet" data-centre="texte">📝 Transcription</button>
+      </div>
+      <div class="outils-scene" id="outils-scene">
+        <select id="format" title="Format de la scène et de la vidéo">
+          <option value="16:9">16:9 · YouTube</option>
+          <option value="9:16">9:16 · TikTok / Reels</option>
+        </select>
+        <button id="capture" class="petit" title="Télécharger l'image de la scène">📸</button>
+        <button id="plein-ecran" class="petit" title="Plein écran">⛶</button>
+      </div>
+      <div class="legende" id="legende" hidden>
+        <span class="lg riche">rime riche</span>
+        <span class="lg multi">multisyllabique</span>
+        <span class="lg fig">figure de style</span>
+      </div>
+    </div>
+    <div id="scene-boite" class="scene-boite">
+      <canvas id="scene"></canvas>
+    </div>
+    <div id="transcription" class="transcription" hidden>
+      <p class="vide">Lance ton instru et commence à kicker : les rimes s'allument ici en direct.</p>
+    </div>
+  </section>
+
+  <!-- Droite : score -->
+  <aside class="score">
+    <div class="note-bloc">
+      <div class="note"><span id="note">0</span><small>/20</small></div>
+      <div class="points"><span id="total">0</span> pts · <span id="note-label">note technique</span></div>
+      <div id="flottants"></div>
+    </div>
+    <div class="compteurs">
+      <div><b id="c-riches">0</b><span>rimes riches</span></div>
+      <div><b id="c-multis">0</b><span>multisyllabiques</span></div>
+      <div><b id="c-figures">0</b><span>figures de style</span></div>
+      <div><b id="c-densite">0%</b><span>mots qui riment</span></div>
+      <div><b id="c-debit">0</b><span>syllabes / s</span></div>
+      <div><b id="c-blancs">0</b><span>blancs</span></div>
+      <div><b id="c-vocab">–</b><span>vocabulaire</span></div>
+      <div><b id="c-style">–</b><span>style probable</span></div>
+    </div>
+    <h3>Fil du juge</h3>
+    <ol id="fil" class="fil"></ol>
+  </aside>
+</main>
+
+<section id="bilan" class="bilan" hidden></section>
+
+<section id="vue-progression" class="progression" hidden></section>
+
+<section id="vue-matiere" class="matiere" hidden></section>
+
+<section id="vue-entrainement" class="progression" hidden></section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+</body>
+</html>
